@@ -8,7 +8,7 @@ class KVStoreClient:
         self.server_process = None
 
     def start_server(self, parameters=None):
-        command = ['wsl', './bb-kvstore_server']
+        command = ['wsl', './binary/bb-kvstore_server']
         if parameters:
             command.append(parameters)
         self.send_command(command)
@@ -31,7 +31,7 @@ class KVStoreClient:
         return response
 
     def login_cli(self, hostname, port):
-        command = f'wsl ./bb-kvstore_cli {hostname} {port}'
+        command = f'wsl ./binary/bb-kvstore_cli {hostname} {port}'
         self.send_command(command)
         response = self.__read_output()
         assert "available commands" in response and "put key=value" in response \
