@@ -1,5 +1,5 @@
 import pytest
-from connection import KVStoreClient
+from connection_handler.connection import KVStoreClient
 
 hostname = "DESKTOP-C1OMGSH"
 port = '6378'
