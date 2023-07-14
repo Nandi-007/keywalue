@@ -9,3 +9,7 @@ class KeyValueSteps:
         response = client.run_cli_command(command='count')
         count = response.split('\\')[0].split(' ')[-1]
         return count
+
+    def put_data(self, client, command_pair):
+        response = client.run_cli_command(command=f'put {command_pair}')
+        return response.split('\\')[0].split('> ')[-1]
