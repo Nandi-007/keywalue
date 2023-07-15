@@ -1,6 +1,3 @@
-from connection_handler.connection import KVStoreClient
-
-
 class KeyValueSteps:
 
     def quit_cli(self, client):
