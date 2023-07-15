@@ -8,18 +8,17 @@ port = '6378'
 
 @pytest.fixture(scope='function', autouse=True)
 def server_setup_teardown():
-    client = KVStoreClient()
+    client = KVStoreClient(hostname, port)
     client.start_server()
 
-    # Wait for the server to start within a specified timeout
-    timeout = 3  # Adjust the timeout value as needed
+    timeout = 5
     start_time = time.time()
     while time.time() - start_time < timeout:
         try:
             client.login_cli(hostname, port)
             break
         except AssertionError:
-            time.sleep(1)  # Wait for 1 second before retrying
+            time.sleep(1)
 
     yield client
     client.stop_cli()
