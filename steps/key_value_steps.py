@@ -17,3 +17,7 @@ class KeyValueSteps:
     def get_data(self, client, key):
         response = client.run_cli_command(command=f'get {key}')
         return response.split('\\')[0].split('> ')[-1]
+
+    def delete_data(self, client, key):
+        response = client.run_cli_command(command=f'del {key}')
+        return response.split('\\')[0].split('> ')[-1]
