@@ -21,3 +21,13 @@ class KeyValueSteps:
     def delete_data(self, client, key):
         response = client.run_cli_command(command=f'del {key}')
         return response.split('\\')[0].split('> ')[-1]
+
+    def list_data(self, client):
+        response = client.run_cli_command(command='list')
+        key_lines = response.split("\\n'b'")
+        if len(key_lines) > 2:
+            keys = [key_lines[0].split(' > ')[1]]
+            keys.extend([key.split('\\x00')[0] for key in key_lines[1:len(key_lines) - 1]])
+        else:
+            keys = key_lines[0].split(' > ')[1].split('\\x00')[0]
+        return keys
