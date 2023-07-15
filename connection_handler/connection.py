@@ -4,7 +4,9 @@ import psutil
 class KVStoreClient:
     server_process = None
 
-    def __init__(self):
+    def __init__(self, hostname, port):
+        self.hostname = hostname
+        self.port = port
         self.server_process = None
 
     def start_server(self, parameters=None):

@@ -2,8 +2,9 @@ from connection_handler.connection import KVStoreClient
 
 
 class KeyValueSteps:
-    def __init__(self):
-        self.client = KVStoreClient()
+
+    def quit_cli(self, client):
+        client.run_cli_command(command='quit')
 
     def get_count(self, client):
         response = client.run_cli_command(command='count')
