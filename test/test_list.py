@@ -24,3 +24,15 @@ class TestList:
         client = server_setup_teardown
         response = self.key_value_steps.list_data(client=client)
         assert "" == response, f"Get is successful, response is:{response}"
+
+    def test_list_positive_limit(self, server_setup_teardown):
+        client = server_setup_teardown
+        keys = []
+        for i in range(10000):
+            key = f'key{i}'
+            keys.append(key)
+            response = self.key_value_steps.put_data(client=client, command_pair=f"{key}=value")
+            assert "OK" == response, f"Put is unsuccessful, response is:{response}"
+
+        response = self.key_value_steps.list_data(client=client)
+        assert keys.sort() == response.sort(), f"Get is unsuccessful, response is:{response}"
