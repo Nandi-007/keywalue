@@ -24,3 +24,12 @@ class TestCount:
         client = server_setup_teardown
         response = self.key_value_steps.get_count(client=client)
         assert "0" == response, f"Count is {response}"
+
+    def test_count_positive_limit(self, server_setup_teardown):
+        client = server_setup_teardown
+        for i in range(10000):
+            response = self.key_value_steps.put_data(client=client, command_pair=f"key{i}=value")
+            assert "OK" == response, f"Put is unsuccessful, response is:{response}"
+
+        response = self.key_value_steps.get_count(client=client)
+        assert "10000" == response, f"Count is {response}"
