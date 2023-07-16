@@ -1,6 +1,6 @@
 import time
 
-from steps.key_value_steps import KeyValueSteps
+from keywalue.steps.key_value_steps import KeyValueSteps
 
 
 class TestRestart:
@@ -14,8 +14,8 @@ class TestRestart:
         assert "1" == response, f"Count is {response}"
         client.stop_cli()
         client.kill_server()
-        client.start_server()
+        client.start_server(client.server_parameters)
         time.sleep(5)
-        client.login_cli(client.hostname, client.port)
+        client.login_cli()
         response = self.key_value_steps.get_count(client=client)
         assert "0" == response, f"Count is {response}"

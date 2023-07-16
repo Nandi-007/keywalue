@@ -6,15 +6,14 @@ import psutil
 class KVStoreClient:
     server_process = None
 
-    def __init__(self, hostname, port):
+    def __init__(self, hostname, port, server_parameters):
         self.hostname = hostname
         self.port = port
+        self.server_parameters = server_parameters
         self.server_process = None
 
-    def start_server(self, parameters=None):
-        command = ['wsl', '../binary/bb-kvstore_server']
-        if parameters:
-            command.append(parameters)
+    def start_server(self, parameters=""):
+        command = f'wsl ../binary/bb-kvstore_server{parameters}'
         self.send_command(command)
 
     def stop_cli(self):
@@ -52,8 +51,8 @@ class KVStoreClient:
                 break
         return response
 
-    def login_cli(self, hostname, port):
-        command = f'wsl ../binary/bb-kvstore_cli {hostname} {port}'
+    def login_cli(self):
+        command = f'wsl ../binary/bb-kvstore_cli {self.hostname} {self.port}'
         self.send_command(command)
         response = self.__read_output()
         assert "available commands" in response and "put key=value" in response \

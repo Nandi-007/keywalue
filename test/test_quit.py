@@ -1,4 +1,4 @@
-from steps.key_value_steps import KeyValueSteps
+from keywalue.steps.key_value_steps import KeyValueSteps
 
 
 class TestQuit:
@@ -11,6 +11,6 @@ class TestQuit:
         response = self.key_value_steps.list_data(client=client)
         assert "key" == response, f"Get is unsuccessful, response is:{response}"
         self.key_value_steps.quit_cli(client=client)
-        client.login_cli(client.hostname, client.port)
+        client.login_cli()
         response = self.key_value_steps.list_data(client=client)
         assert "key" == response, f"Get is unsuccessful, response is:{response}"

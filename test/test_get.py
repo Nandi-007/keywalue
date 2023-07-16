@@ -1,4 +1,4 @@
-from steps.key_value_steps import KeyValueSteps
+from keywalue.steps.key_value_steps import KeyValueSteps
 
 
 class TestGet:
